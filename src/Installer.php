@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -24,7 +26,9 @@ if ((@ini_get('max_execution_time') !== '0') && (@ini_get('max_execution_time'))
 class Installer
 {
     private Client $client;
+
     private string $productID;
+
     private string $currentVersion;
 
     public function __construct(Client $client)
@@ -45,7 +49,6 @@ class Installer
 
     /**
      * Check if the license is valid
-     * @return PromiseInterface|Response
      */
     public function checkUpdate(): PromiseInterface|Response
     {
@@ -57,12 +60,10 @@ class Installer
 
     /**
      * Download the update file it will follow the respective order
-     * @return array
      */
     public function downloadUpdate(): array
     {
         ini_set('max_execution_time', 300);
-
 
         $update = $this->checkUpdate();
 
@@ -83,7 +84,6 @@ class Installer
 
     /**
      * Update the downloaded file
-     * @return void
      */
     public function update(): void
     {
@@ -102,7 +102,6 @@ class Installer
 
     /**
      * Get the license file
-     * @return bool|string|null
      */
     private function getLicenseFile(): bool|string|null
     {
@@ -117,25 +116,23 @@ class Installer
 
     /**
      * Download the main file
-     * @param PromiseInterface|Response $update
-     * @return string|null
      */
     private function downloadMainFile(PromiseInterface|Response $update): ?string
     {
         try {
             // Check if the update is already downloaded
-            if (file_exists(base_path("/update_main_" . $update->json('version') . ".zip"))) {
-                return base_path("/update_main_" . $update->json('version') . ".zip");
+            if (file_exists(base_path('/update_main_'.$update->json('version').'.zip'))) {
+                return base_path('/update_main_'.$update->json('version').'.zip');
             }
 
             // Download the update
-            $response = $this->client->post('/api/download_update/main/' . $update->json('update_id'), [
+            $response = $this->client->post('/api/download_update/main/'.$update->json('update_id'), [
                 'license_file' => $this->getLicenseFile(),
             ]);
 
             // Check if the download is successful
             if ($response->successful()) {
-                $mainFilePath = base_path("/update_main_" . $update->json('version') . ".sql");
+                $mainFilePath = base_path('/update_main_'.$update->json('version').'.sql');
 
                 // Save the file
                 file_put_contents($mainFilePath, $response->body());
@@ -148,36 +145,35 @@ class Installer
             // Delete the file if it is already downloaded
             if (isset($mainFilePath)) {
                 @chmod($mainFilePath, 0777);
-                if (is_writeable($mainFilePath)) {
+                if (is_writable($mainFilePath)) {
                     unlink($mainFilePath);
                 }
             }
 
             flash($e->getMessage(), 'error');
+
             return null;
         }
     }
 
     /**
      * Download the sql file
-     * @param PromiseInterface|Response $update
-     * @return string|null
      */
     private function downloadSqlFile(PromiseInterface|Response $update): ?string
     {
         try {
             // Check if the update is already downloaded
-            if (file_exists(base_path("/update_sql_" . $update->json('version') . ".sql"))) {
-                return base_path("/update_sql_" . $update->json('version') . ".sql");
+            if (file_exists(base_path('/update_sql_'.$update->json('version').'.sql'))) {
+                return base_path('/update_sql_'.$update->json('version').'.sql');
             }
 
             // Download the update
-            $response = $this->client->post('/api/download_update/sql/' . $update->json('update_id'), [
+            $response = $this->client->post('/api/download_update/sql/'.$update->json('update_id'), [
                 'license_file' => $this->getLicenseFile(),
             ]);
 
             if ($response->successful()) {
-                $sqlFilePath = base_path("/update_sql_" . $update->json('version') . ".sql");
+                $sqlFilePath = base_path('/update_sql_'.$update->json('version').'.sql');
 
                 // Save the file
                 file_put_contents($sqlFilePath, $response->body());
@@ -190,19 +186,19 @@ class Installer
             // Delete the file if it is already downloaded
             if (isset($sqlFilePath)) {
                 @chmod($sqlFilePath, 0777);
-                if (is_writeable($sqlFilePath)) {
+                if (is_writable($sqlFilePath)) {
                     unlink($sqlFilePath);
                 }
             }
 
             flash($e->getMessage(), 'error');
+
             return null;
         }
     }
 
     /**
      * Extract the main file
-     * @param mixed $main_file
      */
     private function updateMainFile(mixed $main_file): void
     {
@@ -215,7 +211,7 @@ class Installer
                 $zip->close();
 
                 @chmod($main_file, 0777);
-                if (is_writeable($main_file)) {
+                if (is_writable($main_file)) {
                     unlink($main_file);
                 }
 
@@ -227,8 +223,6 @@ class Installer
 
     /**
      * Update the sql file
-     * @param mixed $sql_file
-     * @return void
      */
     private function updateSqlFile(mixed $sql_file): void
     {
@@ -236,7 +230,7 @@ class Installer
             DB::unprepared(file_get_contents($sql_file));
 
             @chmod($sql_file, 0777);
-            if (is_writeable($sql_file)) {
+            if (is_writable($sql_file)) {
                 unlink($sql_file);
             }
         } catch (Exception $e) {
@@ -246,24 +240,22 @@ class Installer
 
     /**
      * Update the version
-     * @param mixed $version
-     * @return void
      */
     private function updateVersion(mixed $version): void
     {
         @chmod(base_path('.env'), 0777);
 
-        if (is_writeable(base_path('.env'))) {
+        if (is_writable(base_path('.env'))) {
             // Get the content of the .env file
             $env = file_get_contents(base_path('.env'));
 
             // Check if the APP_VERSION key is present
-            if (!str_contains($env, 'APP_VERSION=')) {
+            if (! str_contains($env, 'APP_VERSION=')) {
                 // Add the APP_VERSION key if it doesn't exist
-                $env .= "\nAPP_VERSION=" . $version;
+                $env .= "\nAPP_VERSION=".$version;
             } else {
                 // Replace the version
-                $env = preg_replace('/^APP_VERSION=(.*)$/m', 'APP_VERSION=' . $version, $env);
+                $env = preg_replace('/^APP_VERSION=(.*)$/m', 'APP_VERSION='.$version, $env);
             }
 
             // Save the .env file

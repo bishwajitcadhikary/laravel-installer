@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -11,9 +13,7 @@ namespace AbnDevs\Installer;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 if ((@ini_get('max_execution_time') !== '0') && (@ini_get('max_execution_time')) < 600) {
     @ini_set('max_execution_time', 600);
@@ -23,8 +23,11 @@ if ((@ini_get('max_execution_time') !== '0') && (@ini_get('max_execution_time'))
 class License
 {
     private Client $client;
+
     private string $productID;
+
     private string $verificationType;
+
     private int $verificationPeriod;
 
     public function __construct(Client $client)
@@ -58,7 +61,7 @@ class License
 
         if ($response->successful() && $response->json('status')) {
             $this->saveLicense($response->json('lic_response'));
-        }else{
+        } else {
             $this->removeLicense();
         }
 
@@ -69,8 +72,8 @@ class License
     {
         $localLicenseFile = $this->getLicenseFile();
 
-        if ($timeBased && $this->verificationPeriod > 0){
-            match ($this->verificationPeriod){
+        if ($timeBased && $this->verificationPeriod > 0) {
+            match ($this->verificationPeriod) {
                 1 => $this->verificationPeriod = '1 Day',
                 3 => $this->verificationPeriod = '3 Days',
                 7 => $this->verificationPeriod = '1 Week',
@@ -85,15 +88,15 @@ class License
 
         if ($lastCheckedAt < now()->subDays($this->verificationPeriod) || $localLicenseFile === null) {
             $response = $this->client->post('/api/verify_license', [
-                "product_id" => $this->productID,
-                "license_code" => $purchaseCode,
-                "client_name" => $clientName,
-                "license_file" => $localLicenseFile,
+                'product_id' => $this->productID,
+                'license_code' => $purchaseCode,
+                'client_name' => $clientName,
+                'license_file' => $localLicenseFile,
             ]);
 
             if ($response->successful() && $response->json('status')) {
                 Cache::put('installer.last_checked_at', now());
-            }else{
+            } else {
                 $this->removeLicense();
                 Cache::forget('installer.last_checked_at');
             }
@@ -104,17 +107,17 @@ class License
         return [
             'status' => true,
             'message' => 'License verified successfully.',
-            'data' => null
+            'data' => null,
         ];
     }
 
     public function deactivate($purchaseCode = null, $clientName = null): PromiseInterface|Response
     {
         $response = $this->client->post('/api/deactivate_license', [
-            "product_id" => $this->productID,
-            "license_code" => $purchaseCode,
-            "client_name" => $clientName,
-            "license_file" => $this->getLicenseFile(),
+            'product_id' => $this->productID,
+            'license_code' => $purchaseCode,
+            'client_name' => $clientName,
+            'license_file' => $this->getLicenseFile(),
         ]);
 
         if ($response->successful() && $response->json('status')) {
@@ -133,7 +136,7 @@ class License
     private function removeLicense(): void
     {
         if (file_exists(storage_path('app/license'))) {
-            if (!is_writable(storage_path('app/license'))) {
+            if (! is_writable(storage_path('app/license'))) {
                 @chmod(storage_path('app/license'), 0777);
             }
 

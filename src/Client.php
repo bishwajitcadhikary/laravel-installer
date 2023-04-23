@@ -1,13 +1,16 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
  **/
 
 namespace AbnDevs\Installer;
+
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -15,7 +18,9 @@ use Illuminate\Support\Facades\Http;
 class Client
 {
     private string|null $baseUrl;
+
     private string|null $apiKey;
+
     private string|null $language;
 
     public function __construct()
@@ -62,7 +67,7 @@ class Client
             return $url;
         }
 
-        return $this->baseUrl . '/' . $url;
+        return $this->baseUrl.'/'.$url;
     }
 
     private function getHeaders(): array

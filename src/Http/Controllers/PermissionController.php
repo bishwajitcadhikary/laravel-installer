@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -9,7 +11,6 @@
 
 namespace AbnDevs\Installer\Http\Controllers;
 
-use AbnDevs\Installer\Installer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 
@@ -31,13 +32,15 @@ class PermissionController extends Controller
 
     public function index()
     {
-        if (!Cache::get('installer.agreement')) {
+        if (! Cache::get('installer.agreement')) {
             flash('Please agree to the terms and conditions.', 'error');
+
             return redirect()->route('installer.agreement.index');
         }
 
-        if (!Cache::get('installer.requirements')) {
+        if (! Cache::get('installer.requirements')) {
             flash('Please check the requirements.', 'error');
+
             return redirect()->route('installer.requirements.index');
         }
 
@@ -48,7 +51,7 @@ class PermissionController extends Controller
         $procOpen = $this->checkProcOpen();
         $allowUrlFopen = $this->checkAllowUrlFopen();
 
-        $hasError = $permissions['errors'] || !$procOpen || !$allowUrlFopen;
+        $hasError = $permissions['errors'] || ! $procOpen || ! $allowUrlFopen;
 
         return view('installer::permissions', [
             'permissions' => $permissions['permissions'],
@@ -60,13 +63,15 @@ class PermissionController extends Controller
 
     public function store()
     {
-        if (!Cache::get('installer.agreement')) {
+        if (! Cache::get('installer.agreement')) {
             flash('Please agree to the terms and conditions.', 'error');
+
             return redirect()->route('installer.agreement.index');
         }
 
-        if (!Cache::get('installer.requirements')) {
+        if (! Cache::get('installer.requirements')) {
             flash('Please check the requirements.', 'error');
+
             return redirect()->route('installer.requirements.index');
         }
 
@@ -77,10 +82,11 @@ class PermissionController extends Controller
         $procOpen = $this->checkProcOpen();
         $allowUrlFopen = $this->checkAllowUrlFopen();
 
-        $hasError = $permissions['errors'] || !$procOpen || !$allowUrlFopen;
+        $hasError = $permissions['errors'] || ! $procOpen || ! $allowUrlFopen;
 
         if ($hasError) {
             flash('Please check the permissions.', 'error');
+
             return redirect()->route('installer.permissions');
         }
 

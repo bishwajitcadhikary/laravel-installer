@@ -1,12 +1,13 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
  **/
-
 
 use AbnDevs\Installer\Http\Controllers\DatabaseController;
 use AbnDevs\Installer\Http\Controllers\InstallController;
@@ -16,7 +17,7 @@ use AbnDevs\Installer\Http\Controllers\RequirementController;
 use AbnDevs\Installer\Http\Controllers\SMTPController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => config('installer.prefix', 'installer'), 'as' => 'installer.'], function (){
+Route::group(['prefix' => config('installer.prefix', 'installer'), 'as' => 'installer.'], function () {
     Route::get('/', [InstallController::class, 'index'])->name('agreement.index');
     Route::post('/', [InstallController::class, 'store'])->name('agreement.store');
 

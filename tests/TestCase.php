@@ -2,9 +2,9 @@
 
 namespace AbnDevs\Installer\Tests;
 
+use AbnDevs\Installer\InstallerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use AbnDevs\Installer\InstallerServiceProvider;
 
 class TestCase extends Orchestra
 {

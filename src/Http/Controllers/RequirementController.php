@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -23,7 +25,7 @@ class RequirementController extends Controller
 
     public function index()
     {
-        if (!Cache::get('installer.agreement')) {
+        if (! Cache::get('installer.agreement')) {
             return redirect()->route('installer.agreement.index');
         }
 
@@ -31,7 +33,7 @@ class RequirementController extends Controller
 
         $requirements = $this->checkServerRequirements();
 
-        $hasError = !$phpSupportInfo['supported'] || ($requirements['errors'] ?? false);
+        $hasError = ! $phpSupportInfo['supported'] || ($requirements['errors'] ?? false);
 
         return view('installer::requirements', [
             'phpSupportInfo' => $phpSupportInfo,
@@ -40,11 +42,9 @@ class RequirementController extends Controller
         ]);
     }
 
-
-
     public function store()
     {
-        if (!Cache::get('installer.agreement')) {
+        if (! Cache::get('installer.agreement')) {
             return redirect()->route('installer.agreement.index');
         }
 
@@ -52,10 +52,11 @@ class RequirementController extends Controller
 
         $requirements = $this->checkServerRequirements();
 
-        $hasError = !$phpSupportInfo['supported'] || ($requirements['errors'] ?? false);
+        $hasError = ! $phpSupportInfo['supported'] || ($requirements['errors'] ?? false);
 
         if ($hasError) {
             flash('Please fix the errors before proceeding.', 'error');
+
             return redirect()->route('installer.requirements.index');
         }
 
@@ -121,7 +122,7 @@ class RequirementController extends Controller
                     foreach ($requirement as $php) {
                         $results['requirements'][$type][$php] = true;
 
-                        if (!extension_loaded($php)) {
+                        if (! extension_loaded($php)) {
                             $results['requirements'][$type][$php] = false;
 
                             $results['errors'] = true;

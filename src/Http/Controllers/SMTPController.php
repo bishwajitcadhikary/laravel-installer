@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -31,13 +33,15 @@ class SMTPController extends Controller
         $verifyLicense = License::verify();
         $databaseInstalled = Storage::disk('local')->exists('database_created');
 
-        if (!$verifyLicense['status']) {
+        if (! $verifyLicense['status']) {
             flash($verifyLicense['message'], 'error');
+
             return redirect()->route('installer.license.index');
         }
 
-        if (!$databaseInstalled) {
+        if (! $databaseInstalled) {
             flash('Please install database first.', 'error');
+
             return redirect()->route('installer.database.index');
         }
 
@@ -67,7 +71,7 @@ class SMTPController extends Controller
             'mail.from' => [
                 'name' => $request->validated('name'),
                 'address' => $request->validated('email'),
-            ]
+            ],
         ]);
 
         try {
@@ -92,13 +96,13 @@ class SMTPController extends Controller
                 return response()->json([
                     'status' => 'success',
                     'message' => 'SMTP Configured Successfully',
-                    'redirect' => route(config('installer.external')[0]['index'])
+                    'redirect' => route(config('installer.external')[0]['index']),
                 ]);
-            }else{
+            } else {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'SMTP Configured Successfully',
-                    'redirect' => route('installer.finish.index')
+                    'redirect' => route('installer.finish.index'),
                 ]);
             }
 

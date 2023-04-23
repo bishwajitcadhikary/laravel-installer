@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -31,8 +33,9 @@ class DatabaseController extends Controller
     {
         $license = License::verify();
 
-        if (!$license['status']) {
+        if (! $license['status']) {
             flash($license['message'], 'error');
+
             return redirect()->route('installer.license.index');
         }
 
@@ -43,7 +46,7 @@ class DatabaseController extends Controller
     {
         $license = License::verify();
 
-        if (!$license['status']) {
+        if (! $license['status']) {
             return response()->json([
                 'status' => 'error',
                 'message' => $license['message'],
