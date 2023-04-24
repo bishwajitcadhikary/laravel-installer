@@ -1,9 +1,7 @@
 <?php
 /**
  * @version 1.0.0
- *
  * @link https://codecanyon.net/user/abndevs/portfolio
- *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -18,14 +16,13 @@ use Exception;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Jackiedo\DotenvEditor\DotenvEditor;
+use Brotzka\DotenvEditor\DotenvEditor;
 
 class DatabaseController extends Controller
 {
     public function __construct(readonly DotenvEditor $dotenvEditor)
     {
-        $this->dotenvEditor->load(base_path('.env'));
-        $this->dotenvEditor->autoBackup(false);
+
     }
 
     public function index()
@@ -68,7 +65,7 @@ class DatabaseController extends Controller
 
         // Save database credentials
         try {
-            $this->dotenvEditor->setKeys([
+            $this->dotenvEditor->addData([
                 'DB_CONNECTION' => $request->validated('driver'),
                 'DB_HOST' => $request->validated('host'),
                 'DB_PORT' => $request->validated('port'),
@@ -76,8 +73,6 @@ class DatabaseController extends Controller
                 'DB_USERNAME' => $request->validated('username'),
                 'DB_PASSWORD' => $request->validated('password'),
             ]);
-
-            $this->dotenvEditor->save();
 
             // Migrate database
             Artisan::call('migrate:fresh --seed --force');

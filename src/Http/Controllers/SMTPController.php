@@ -1,9 +1,7 @@
 <?php
 /**
  * @version 1.0.0
- *
  * @link https://codecanyon.net/user/abndevs/portfolio
- *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -15,14 +13,13 @@ use AbnDevs\Installer\Facades\License;
 use AbnDevs\Installer\Http\Requests\StoreSMTPRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
-use Jackiedo\DotenvEditor\DotenvEditor;
+use Brotzka\DotenvEditor\DotenvEditor;
 
 class SMTPController extends Controller
 {
     public function __construct(readonly DotenvEditor $dotenvEditor)
     {
-        $this->dotenvEditor->load(base_path('.env'));
-        $this->dotenvEditor->autoBackup(false);
+
     }
 
     public function index()
@@ -66,7 +63,7 @@ class SMTPController extends Controller
 
         try {
 
-            $this->dotenvEditor->setKeys([
+            $this->dotenvEditor->addData([
                 'MAIL_MAILER' => $driver,
                 'MAIL_HOST' => $request->validated('host'),
                 'MAIL_PORT' => $request->validated('port'),
@@ -76,7 +73,6 @@ class SMTPController extends Controller
                 'MAIL_FROM_ADDRESS' => $request->validated('email'),
                 'MAIL_FROM_NAME' => $request->validated('name'),
             ]);
-            $this->dotenvEditor->save();
 
             Cache::put('installer.smtp', true);
 
