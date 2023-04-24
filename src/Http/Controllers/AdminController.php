@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -30,8 +32,8 @@ class AdminController extends Controller
             'password' => bcrypt($request->validated('password')),
         ]);
 
-        if (config('installer.admin.has_role')){
-            if (!Role::where('name', 'Super Admin')->exists()) {
+        if (config('installer.admin.has_role')) {
+            if (! Role::where('name', 'Super Admin')->exists()) {
                 Role::create(['name' => config('installer.admin.role')]);
             }
 

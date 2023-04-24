@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -21,8 +23,11 @@ if ((@ini_get('max_execution_time') !== '0') && (@ini_get('max_execution_time'))
 class License
 {
     private Client $client;
+
     private string $productID;
+
     private string $verificationType;
+
     private int $verificationPeriod;
 
     public function __construct(Client $client)
@@ -75,7 +80,7 @@ class License
                 30 => $this->verificationPeriod = '1 Month',
                 90 => $this->verificationPeriod = '3 Months',
                 365 => $this->verificationPeriod = '1 Year',
-                default => $this->verificationPeriod = $this->verificationPeriod . ' Days',
+                default => $this->verificationPeriod = $this->verificationPeriod.' Days',
             };
         }
 
@@ -83,10 +88,10 @@ class License
 
         if ($lastCheckedAt < now()->subDays($this->verificationPeriod) || $localLicenseFile === null) {
             $response = $this->client->post('/api/verify_license', [
-                "product_id" => $this->productID,
-                "license_code" => $purchaseCode,
-                "client_name" => $clientName,
-                "license_file" => $localLicenseFile,
+                'product_id' => $this->productID,
+                'license_code' => $purchaseCode,
+                'client_name' => $clientName,
+                'license_file' => $localLicenseFile,
             ]);
 
             if ($response->successful() && $response->json('status')) {
@@ -102,17 +107,17 @@ class License
         return [
             'status' => true,
             'message' => 'License verified successfully.',
-            'data' => null
+            'data' => null,
         ];
     }
 
     public function deactivate($purchaseCode = null, $clientName = null): PromiseInterface|Response
     {
         $response = $this->client->post('/api/deactivate_license', [
-            "product_id" => $this->productID,
-            "license_code" => $purchaseCode,
-            "client_name" => $clientName,
-            "license_file" => $this->getLicenseFile(),
+            'product_id' => $this->productID,
+            'license_code' => $purchaseCode,
+            'client_name' => $clientName,
+            'license_file' => $this->getLicenseFile(),
         ]);
 
         if ($response->successful() && $response->json('status')) {
@@ -131,7 +136,7 @@ class License
     private function removeLicense(): void
     {
         if (file_exists(storage_path('app/.license'))) {
-            if (!is_writable(storage_path('app/.license'))) {
+            if (! is_writable(storage_path('app/.license'))) {
                 @chmod(storage_path('app/.license'), 0777);
             }
 

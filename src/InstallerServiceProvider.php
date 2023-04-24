@@ -59,7 +59,7 @@ class InstallerServiceProvider extends PackageServiceProvider
         $this->app['router']->aliasMiddleware('licensed', LicensedMiddleware::class);
 
         $kernel = $this->app->make(Kernel::class);
-        $kernel->prependMiddlewareToGroup('web',InstallationMiddleware::class);
+        $kernel->prependMiddlewareToGroup('web', InstallationMiddleware::class);
         $kernel->prependMiddlewareToGroup('web', LicensedMiddleware::class);
     }
 }
