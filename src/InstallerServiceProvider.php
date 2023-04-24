@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -33,9 +35,9 @@ class InstallerServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasAssets()
             ->hasRoute('web')
-            ->hasInstallCommand(function(InstallCommand $command) {
+            ->hasInstallCommand(function (InstallCommand $command) {
                 $command
-                    ->startWith(function(InstallCommand $command) {
+                    ->startWith(function (InstallCommand $command) {
                         $command->info('Hello, and welcome to my great new package!');
                     })
                     ->publishConfigFile()
