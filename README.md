@@ -23,24 +23,10 @@ You can install the package via composer:
 composer require bishwajitcadhikary/installer
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="installer-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="installer-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
 ```
 
 Optionally, you can publish the views using
@@ -53,13 +39,7 @@ php artisan vendor:publish --tag="installer-views"
 
 ```php
 $installer = new AbnDevs\Installer();
-echo $installer->echoPhrase('Hello, AbnDevs!');
-```
-
-## Testing
-
-```bash
-composer test
+echo $installer->update();
 ```
 
 ## Changelog
