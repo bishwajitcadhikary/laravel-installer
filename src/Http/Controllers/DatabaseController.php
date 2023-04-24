@@ -1,7 +1,9 @@
 <?php
 /**
  * @version 1.0.0
+ *
  * @link https://codecanyon.net/user/abndevs/portfolio
+ *
  * @author Bishwajit Adhikary
  * @copyright (c) 2023 abnDevs
  * @license https://codecanyon.net/licenses/terms/regular
@@ -12,11 +14,11 @@ namespace AbnDevs\Installer\Http\Controllers;
 use AbnDevs\Installer\Facades\License;
 use AbnDevs\Installer\Http\Requests\StoreDatabaseRequest;
 use App\Http\Controllers\Controller;
+use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Brotzka\DotenvEditor\DotenvEditor;
 
 class DatabaseController extends Controller
 {
