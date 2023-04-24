@@ -8,6 +8,7 @@
  **/
 
 
+use AbnDevs\Installer\Http\Controllers\AdminController;
 use AbnDevs\Installer\Http\Controllers\DatabaseController;
 use AbnDevs\Installer\Http\Controllers\InstallController;
 use AbnDevs\Installer\Http\Controllers\LicenseController;
@@ -16,7 +17,12 @@ use AbnDevs\Installer\Http\Controllers\RequirementController;
 use AbnDevs\Installer\Http\Controllers\SMTPController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => config('installer.prefix', 'installer'), 'as' => 'installer.'], function (){
+Route::group([
+    'prefix' => config('installer.prefix', 'installer'),
+    'as' => 'installer.',
+    'middleware' => ['web', 'installed'],
+    'excluded_middleware' => ['install', 'licensed'],
+], function (){
     Route::get('/', [InstallController::class, 'index'])->name('agreement.index');
     Route::post('/', [InstallController::class, 'store'])->name('agreement.store');
 
@@ -35,5 +41,15 @@ Route::group(['prefix' => config('installer.prefix', 'installer'), 'as' => 'inst
     Route::get('smtp', [SMTPController::class, 'index'])->name('smtp.index');
     Route::post('smtp', [SMTPController::class, 'store'])->name('smtp.store');
 
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+    Route::post('admin', [AdminController::class, 'store'])->name('admin.store');
+
     Route::get('finish', [InstallController::class, 'finish'])->name('finish.index');
+
+    Route::get('activation', [LicenseController::class, 'activation'])
+        ->name('license.activation')
+        ->withoutMiddleware('installed');
+    Route::post('activation', [LicenseController::class, 'activate'])
+        ->name('license.activation.activate')
+        ->withoutMiddleware('installed');
 });

@@ -9,6 +9,11 @@
 
 namespace AbnDevs\Installer;
 
+use AbnDevs\Installer\Http\Middleware\InstallationMiddleware;
+use AbnDevs\Installer\Http\Middleware\LicensedMiddleware;
+use AbnDevs\Installer\Http\Middleware\RedirectIfInstalledMiddleware;
+use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Contracts\Http\Kernel;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -38,5 +43,21 @@ class InstallerServiceProvider extends PackageServiceProvider
                     ->copyAndRegisterServiceProviderInApp()
                     ->askToStarRepoOnGitHub('bishwajitcadhikary/laravel-installer');
             });
+    }
+
+    /**
+     * @throws BindingResolutionException
+     */
+    public function bootingPackage()
+    {
+        parent::bootingPackage();
+
+        $this->app['router']->aliasMiddleware('install', InstallationMiddleware::class);
+        $this->app['router']->aliasMiddleware('installed', RedirectIfInstalledMiddleware::class);
+        $this->app['router']->aliasMiddleware('licensed', LicensedMiddleware::class);
+
+        $kernel = $this->app->make(Kernel::class);
+        $kernel->prependMiddlewareToGroup('web',InstallationMiddleware::class);
+        $kernel->prependMiddlewareToGroup('web', LicensedMiddleware::class);
     }
 }

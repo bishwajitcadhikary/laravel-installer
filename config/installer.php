@@ -11,6 +11,13 @@
 return [
     'prefix' => env('INSTALLER_PREFIX', 'installer'),
 
+    /*
+     * -------------------------------------------------------------------------------------
+     * License Verification
+     * -------------------------------------------------------------------------------------
+     *
+     * Here you have to specify the api key that you will use to verify the purchase code
+     */
     'license' => [
         'product_id' => '',
         'api_url' => 'https://license.abndevs.net',
@@ -18,19 +25,24 @@ return [
         'api_language' => 'english',
         'current_version' => env('APP_VERSION', 'v1.0.0'),
         'verify_type' => 'Regular License', // Regular License, Extended License
-        'verification_period' => 3,
+    ],
+
+    'admin' => [
+        'show_form' => true,
+        'has_role' => false,
+        'role' => '', // Role name ex: Super Admin
     ],
 
     /*
-   |--------------------------------------------------------------------------
-   | Server Requirements
-   |--------------------------------------------------------------------------
-   |
-   | This is the default Laravel server requirements, you can add as many
-   | as your application require, we check if the extension is enabled
-   | by looping through the array and run "extension_loaded" on it.
-   |
-   */
+    *--------------------------------------------------------------------------
+    * Server Requirements
+    *--------------------------------------------------------------------------
+    *
+    * This is the default Laravel server requirements, you can add as many
+    * as your application require, we check if the extension is enabled
+    * by looping through the array and run "extension_loaded" on it.
+    *
+    */
     'core' => [
         'minPhpVersion' => '8.1.0',
     ],
@@ -62,13 +74,13 @@ return [
     ],
 
     /*
-    |--------------------------------------------------------------------------
-    | Folders Permissions
-    |--------------------------------------------------------------------------
-    |
-    | This is the default Laravel folders permissions, if your application
-    | requires more permissions just add them to the array list below.
-    |
+    *--------------------------------------------------------------------------
+    * Folders Permissions
+    *--------------------------------------------------------------------------
+    *
+    * This is the default Laravel folders permissions, if your application
+    * requires more permissions just add them to the array list below.
+    *
     */
     'permissions' => [
         base_path('storage/framework/') => '775',

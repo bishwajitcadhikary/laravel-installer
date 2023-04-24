@@ -14,6 +14,7 @@ use AbnDevs\Installer\Http\Requests\StoreAgreementRequest;
 use AbnDevs\Installer\Facades\Installer;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class InstallController extends Controller
 {
@@ -42,31 +43,13 @@ class InstallController extends Controller
             return redirect()->route('installer.license.index');
         }
 
-        // Check if Database is installed
-        $databaseInstalled = Installer::isDatabaseInstalled();
-
-        if (!$databaseInstalled) {
-            flash('Please install database first.', 'error');
-            return redirect()->route('installer.database.index');
-        }
-
         // Check if SMTP is configured
         if (!Cache::get('installer.smtp')) {
             flash('Please configure SMTP first.', 'error');
             return redirect()->route('installer.smtp.index');
         }
 
-        // Check if external routes are configured
-        if(config('installer.external')){
-            // Get last route
-            $lastRoute = collect(config('installer.external'))->last();
-
-            // Check if last route is configured
-            if(!Cache::get("installer.{$lastRoute['cache']}")){
-                flash("Please configure {$lastRoute['title']} first", 'error');
-                return redirect()->route($lastRoute['index']);
-            }
-        }
+        Storage::disk('local')->put('installed', now());
 
         Cache::clear();
 

@@ -106,7 +106,7 @@ class Installer
      */
     private function getLicenseFile(): bool|string|null
     {
-        $path = storage_path('app/license');
+        $path = storage_path('app/.license');
 
         if (file_exists($path)) {
             return file_get_contents($path);

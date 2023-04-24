@@ -10,7 +10,7 @@
     <p>The abnDevs Team</p>
 
     <div class="button-group">
-        <div class="row justify-content-end">
+        <div class="row justify-content-center">
             <div class="col-12 col-md-6">
                 <a href="{{ route('login') }}" class="btn btn-primary w-100">
                     Login

@@ -55,4 +55,27 @@ class LicenseController extends Controller
             ], 422);
         }
     }
+
+    public function activation()
+    {
+        return view('installer::activation');
+    }
+
+    public function activate(StoreLicenseRequest $request)
+    {
+        $response = License::activate($request->validated('purchase_code'), $request->validated('envato_username'));
+
+        if ($response->json('status')) {
+            return response()->json([
+                'status' => 'success',
+                'message' => $response->json('message'),
+                'redirect' => route('login'),
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => $response->json('message'),
+            ], 422);
+        }
+    }
 }

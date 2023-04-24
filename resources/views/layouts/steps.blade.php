@@ -30,12 +30,10 @@
              data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Configure Mail Connection"><i
                 class="bi bi-envelope-check"></i><span>Step: 6</span></div>
 
-        @if(config('installer.external'))
-            @foreach(config('installer.external') as $external)
-                <div @class(['active' => Route::is($external['index']), 'done' => Cache::get('installer.'.$external['cache'])])
-                     data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{{ $external['title'] }}"><i
-                        class="{{ $external['icon'] }}"></i><span>Step: {{ $loop->index + 7 }}</span></div>
-            @endforeach
+        @if(config('installer.admin.show_form'))
+            <div @class(['active' => Route::is('installer.admin.index'), 'done' => Cache::get('installer.admin')])
+                 data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Admin Setup"><i
+                    class="bi bi-person-check"></i><span>Step: 7</span></div>
         @endif
     </div>
 @endif

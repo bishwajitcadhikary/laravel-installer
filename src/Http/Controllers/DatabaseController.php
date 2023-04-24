@@ -68,11 +68,11 @@ class DatabaseController extends Controller
         try {
             $this->dotenvEditor->setKeys([
                 'DB_CONNECTION' => $request->validated('driver'),
-                'DB_HOST' => $request->validated('db_host'),
-                'DB_PORT' => $request->validated('db_port'),
-                'DB_DATABASE' => $request->validated('db_name'),
-                'DB_USERNAME' => $request->validated('db_username'),
-                'DB_PASSWORD' => $request->validated('db_password'),
+                'DB_HOST' => $request->validated('host'),
+                'DB_PORT' => $request->validated('port'),
+                'DB_DATABASE' => $request->validated('database'),
+                'DB_USERNAME' => $request->validated('username'),
+                'DB_PASSWORD' => $request->validated('password'),
             ]);
 
             $this->dotenvEditor->save();
@@ -82,7 +82,6 @@ class DatabaseController extends Controller
             Artisan::call('key:generate --force');
             Artisan::call('storage:link');
 
-            Storage::disk('local')->put('database_created', now()->toDateTimeString());
             Cache::put('installer.database', true);
 
             return response()->json([

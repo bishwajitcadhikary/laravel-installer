@@ -11,9 +11,7 @@ namespace AbnDevs\Installer;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Http;
 
 if ((@ini_get('max_execution_time') !== '0') && (@ini_get('max_execution_time')) < 600) {
     @ini_set('max_execution_time', 600);
@@ -32,7 +30,7 @@ class License
         $this->client = $client;
         $this->productID = config('installer.license.product_id');
         $this->verificationType = config('installer.license.verify_type');
-        $this->verificationPeriod = config('installer.license.verification_period');
+        $this->verificationPeriod = 30;
     }
 
     public function checkConnection(): PromiseInterface|Response
@@ -58,7 +56,7 @@ class License
 
         if ($response->successful() && $response->json('status')) {
             $this->saveLicense($response->json('lic_response'));
-        }else{
+        } else {
             $this->removeLicense();
         }
 
@@ -69,15 +67,15 @@ class License
     {
         $localLicenseFile = $this->getLicenseFile();
 
-        if ($timeBased && $this->verificationPeriod > 0){
-            match ($this->verificationPeriod){
+        if ($timeBased && $this->verificationPeriod > 0) {
+            match ($this->verificationPeriod) {
                 1 => $this->verificationPeriod = '1 Day',
                 3 => $this->verificationPeriod = '3 Days',
                 7 => $this->verificationPeriod = '1 Week',
                 30 => $this->verificationPeriod = '1 Month',
                 90 => $this->verificationPeriod = '3 Months',
                 365 => $this->verificationPeriod = '1 Year',
-                default => $this->verificationPeriod = $this->verificationPeriod.' Days',
+                default => $this->verificationPeriod = $this->verificationPeriod . ' Days',
             };
         }
 
@@ -93,7 +91,7 @@ class License
 
             if ($response->successful() && $response->json('status')) {
                 Cache::put('installer.last_checked_at', now());
-            }else{
+            } else {
                 $this->removeLicense();
                 Cache::forget('installer.last_checked_at');
             }
@@ -127,23 +125,23 @@ class License
 
     private function saveLicense(mixed $data): void
     {
-        file_put_contents(storage_path('app/license'), trim($data), LOCK_EX);
+        file_put_contents(storage_path('app/.license'), trim($data), LOCK_EX);
     }
 
     private function removeLicense(): void
     {
-        if (file_exists(storage_path('app/license'))) {
-            if (!is_writable(storage_path('app/license'))) {
-                @chmod(storage_path('app/license'), 0777);
+        if (file_exists(storage_path('app/.license'))) {
+            if (!is_writable(storage_path('app/.license'))) {
+                @chmod(storage_path('app/.license'), 0777);
             }
 
-            unlink(storage_path('app/license'));
+            unlink(storage_path('app/.license'));
         }
     }
 
     private function getLicenseFile(): bool|string|null
     {
-        $path = storage_path('app/license');
+        $path = storage_path('app/.license');
 
         if (file_exists($path)) {
             return file_get_contents($path);
