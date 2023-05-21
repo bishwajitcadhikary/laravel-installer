@@ -14,17 +14,20 @@ namespace AbnDevs\Installer\Http\Middleware;
 use AbnDevs\Installer\Facades\License;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LicensedMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        $verifyLicense = License::verify();
+        if (Storage::disk('local')->exists('installed')){
+            $verifyLicense = License::verify();
 
-        if (! $verifyLicense['status']) {
-            flash($verifyLicense['message'], 'error');
+            if (! $verifyLicense['status']) {
+                flash($verifyLicense['message'], 'error');
 
-            return redirect()->route('installer.license.activation');
+                return redirect()->route('installer.license.activation');
+            }
         }
 
         return $next($request);
