@@ -20,7 +20,7 @@ We highly appreciate you sending us a postcard from your hometown, mentioning wh
 You can install the package via composer:
 
 ```bash
-composer require bishwajitcadhikary/installer
+composer require bishwajitcadhikary/laravel-installer
 ```
 
 You can publish the config file with:
