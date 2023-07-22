@@ -14,6 +14,7 @@ class StoreDatabaseRequest extends FormRequest
             'database' => ['required', 'string'],
             'username' => ['required', 'string'],
             'password' => ['nullable', 'string'],
+            'force' => ['nullable', 'boolean'],
         ];
     }
 

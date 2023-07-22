@@ -1,4 +1,5 @@
 <?php
+
 namespace AbnDevs\Installer;
 
 use GuzzleHttp\Promise\PromiseInterface;
@@ -57,7 +58,7 @@ class Client
             return $url;
         }
 
-        return $this->baseUrl.'/'.$url;
+        return $this->baseUrl . '/' . $url;
     }
 
     private function getHeaders(): array

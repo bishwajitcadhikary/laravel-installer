@@ -1,4 +1,5 @@
 <?php
+
 namespace AbnDevs\Installer;
 
 use Exception;
@@ -111,18 +112,18 @@ class Installer
     {
         try {
             // Check if the update is already downloaded
-            if (file_exists(base_path('/update_main_'.$update->json('version').'.zip'))) {
-                return base_path('/update_main_'.$update->json('version').'.zip');
+            if (file_exists(base_path('/update_main_' . $update->json('version') . '.zip'))) {
+                return base_path('/update_main_' . $update->json('version') . '.zip');
             }
 
             // Download the update
-            $response = $this->client->post('/api/download_update/main/'.$update->json('update_id'), [
+            $response = $this->client->post('/api/download_update/main/' . $update->json('update_id'), [
                 'license_file' => $this->getLicenseFile(),
             ]);
 
             // Check if the download is successful
             if ($response->successful()) {
-                $mainFilePath = base_path('/update_main_'.$update->json('version').'.sql');
+                $mainFilePath = base_path('/update_main_' . $update->json('version') . '.sql');
 
                 // Save the file
                 file_put_contents($mainFilePath, $response->body());
@@ -153,17 +154,17 @@ class Installer
     {
         try {
             // Check if the update is already downloaded
-            if (file_exists(base_path('/update_sql_'.$update->json('version').'.sql'))) {
-                return base_path('/update_sql_'.$update->json('version').'.sql');
+            if (file_exists(base_path('/update_sql_' . $update->json('version') . '.sql'))) {
+                return base_path('/update_sql_' . $update->json('version') . '.sql');
             }
 
             // Download the update
-            $response = $this->client->post('/api/download_update/sql/'.$update->json('update_id'), [
+            $response = $this->client->post('/api/download_update/sql/' . $update->json('update_id'), [
                 'license_file' => $this->getLicenseFile(),
             ]);
 
             if ($response->successful()) {
-                $sqlFilePath = base_path('/update_sql_'.$update->json('version').'.sql');
+                $sqlFilePath = base_path('/update_sql_' . $update->json('version') . '.sql');
 
                 // Save the file
                 file_put_contents($sqlFilePath, $response->body());
@@ -240,12 +241,12 @@ class Installer
             $env = file_get_contents(base_path('.env'));
 
             // Check if the APP_VERSION key is present
-            if (! str_contains($env, 'APP_VERSION=')) {
+            if (!str_contains($env, 'APP_VERSION=')) {
                 // Add the APP_VERSION key if it doesn't exist
-                $env .= "\nAPP_VERSION=".$version;
+                $env .= "\nAPP_VERSION=" . $version;
             } else {
                 // Replace the version
-                $env = preg_replace('/^APP_VERSION=(.*)$/m', 'APP_VERSION='.$version, $env);
+                $env = preg_replace('/^APP_VERSION=(.*)$/m', 'APP_VERSION=' . $version, $env);
             }
 
             // Save the .env file

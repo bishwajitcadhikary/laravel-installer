@@ -6,6 +6,7 @@ use AbnDevs\Installer\Http\Requests\StoreAgreementRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class InstallController extends Controller
@@ -14,7 +15,17 @@ class InstallController extends Controller
     {
         Cache::clear();
 
-        return view('installer::index');
+        $path = base_path(config('installer.user_agreement_file_path'));
+        if (File::isFile($path)) {
+            $agreement = file_get_contents($path);
+        }else{
+            $agreement = file_get_contents(__DIR__.'/../../../AGREEMENT.md');
+        }
+
+        return view('installer::index', [
+            'agreement' => $agreement,
+            'showAgreement' => config('installer.show_user_agreement'),
+        ]);
     }
 
     public function store(StoreAgreementRequest $request)

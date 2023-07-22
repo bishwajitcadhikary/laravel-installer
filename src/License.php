@@ -1,4 +1,5 @@
 <?php
+
 namespace AbnDevs\Installer;
 
 use GuzzleHttp\Promise\PromiseInterface;
@@ -70,7 +71,7 @@ class License
                 30 => $this->verificationPeriod = '1 Month',
                 90 => $this->verificationPeriod = '3 Months',
                 365 => $this->verificationPeriod = '1 Year',
-                default => $this->verificationPeriod = $this->verificationPeriod.' Days',
+                default => $this->verificationPeriod = $this->verificationPeriod . ' Days',
             };
         }
 
@@ -126,7 +127,7 @@ class License
     private function removeLicense(): void
     {
         if (file_exists(storage_path('app/.license'))) {
-            if (! is_writable(storage_path('app/.license'))) {
+            if (!is_writable(storage_path('app/.license'))) {
                 @chmod(storage_path('app/.license'), 0777);
             }
 

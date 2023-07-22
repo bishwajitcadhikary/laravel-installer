@@ -8,7 +8,10 @@
     <div class="installation-steps shadow-sm bg-white">
         <div @class(['active' => Route::is('installer.agreement.index'), 'done' => Cache::get('installer.agreement')])
              data-bs-toggle="tooltip" data-bs-placement="bottom"
-             data-bs-title="End-user License Agreement"><i class="bi bi-file-earmark-text"></i><span>Step: 1</span></div>
+             data-bs-title="{{ config('installer.show_user_agreement') ? 'End-user License Agreement' : 'Welcome' }}">
+            <i class="bi {{ config('installer.show_user_agreement') ? 'bi-file-earmark-check' : 'bi-house-door' }}"></i>
+            <span>Step: 1</span>
+        </div>
 
         <div @class(['active' => Route::is('installer.requirements.index'), 'done' => Cache::get('installer.requirements')])
              data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Server Requirements"><i

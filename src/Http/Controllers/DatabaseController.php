@@ -48,8 +48,10 @@ class DatabaseController extends Controller
             // Check if database is empty
             $tables = DB::select('SHOW TABLES');
 
-            if ($tables) {
-                return error('Database is not empty. Please select another database');
+            if (! empty($tables) && ! $request->validated('force')) {
+                return error('Database is not empty.', data: [
+                    'ask_for_force' => true,
+                ]);
             }
         } catch (Exception $e) {
             return error('Please check your database credentials');
@@ -68,9 +70,12 @@ class DatabaseController extends Controller
 
             // Migrate database
             Artisan::call('migrate:fresh --seed --force');
-            Artisan::call('key:generate --force');
             Artisan::call('storage:link');
 
+            Cache::put('installer.agreement', true);
+            Cache::put('installer.requirements', true);
+            Cache::put('installer.permissions', true);
+            Cache::put('installer.license', true);
             Cache::put('installer.database', true);
 
             return response()->json([

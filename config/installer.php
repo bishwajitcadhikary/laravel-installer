@@ -10,7 +10,8 @@ return [
         'support_phone' => '+8801322635808',
     ],
 
-    'user_agreement_file_path' => env('USER_AGREEMENT_FILE_PATH', 'user-agreement.txt'),
+    'show_user_agreement' => env('SHOW_USER_AGREEMENT', true),
+    'user_agreement_file_path' => env('USER_AGREEMENT_FILE_PATH'),
 
     /*
      * -------------------------------------------------------------------------------------

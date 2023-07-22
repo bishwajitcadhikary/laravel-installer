@@ -16,6 +16,7 @@ class RequirementController extends Controller
     public function index()
     {
         if (! Cache::get('installer.agreement')) {
+            flash('Please agree to the terms and conditions before proceeding.', 'error');
             return redirect()->route('installer.agreement.index');
         }
 
@@ -35,6 +36,7 @@ class RequirementController extends Controller
     public function store()
     {
         if (! Cache::get('installer.agreement')) {
+            flash('Please agree to the terms and conditions before proceeding.', 'error');
             return redirect()->route('installer.agreement.index');
         }
 

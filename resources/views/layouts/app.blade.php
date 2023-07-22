@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/installer/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/installer/css/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/installer/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/installer/css/jquery-confirm.min.css') }}">
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('vendor/installer/style.css') }}">
@@ -41,6 +42,7 @@
 <script src="{{ asset('vendor/installer/js/jquery.form.min.js') }}"></script>
 <script src="{{ asset('vendor/installer/js/jquery.validate.js') }}"></script>
 <script src="{{ asset('vendor/installer/js/flasher.min.js') }}"></script>
+<script src="{{ asset('vendor/installer/js/jquery-confirm.min.js') }}"></script>
 <script src="{{ asset('vendor/installer/js/active.js') }}"></script>
 
 @stack('pageScripts')

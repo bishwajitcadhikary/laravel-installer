@@ -5,6 +5,7 @@ use AbnDevs\Installer\Facades\License;
 use AbnDevs\Installer\Http\Requests\StoreLicenseRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class LicenseController extends Controller
 {
@@ -53,6 +54,12 @@ class LicenseController extends Controller
 
     public function activation()
     {
+        if (! Storage::disk('local')->exists('installed')){
+            flash('Please install the application.', 'error');
+
+            return redirect()->route('installer.agreement.index');
+        }
+
         return view('installer::activation');
     }
 
