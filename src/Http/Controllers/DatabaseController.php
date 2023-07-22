@@ -1,14 +1,4 @@
 <?php
-/**
- * @version 1.0.0
- *
- * @link https://codecanyon.net/user/abndevs/portfolio
- *
- * @author Bishwajit Adhikary
- * @copyright (c) 2023 abnDevs
- * @license https://codecanyon.net/licenses/terms/regular
- **/
-
 namespace AbnDevs\Installer\Http\Controllers;
 
 use AbnDevs\Installer\Facades\License;
@@ -89,6 +79,7 @@ class DatabaseController extends Controller
                 'redirect' => route('installer.smtp.index'),
             ]);
         } catch (Exception $e) {
+            Cache::forget('installer.database');
             return error($e->getMessage());
         }
     }

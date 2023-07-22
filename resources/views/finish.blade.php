@@ -7,7 +7,7 @@
     <h1>Congratulations on Your Installation!</h1>
     <p>We are thrilled to hear that your installation has been successfully completed! It's an impressive accomplishment, and we're sure it will serve you well.</p>
     <p>Best wishes,</p>
-    <p>The abnDevs Team</p>
+    <p>The {{ config('installer.company.name') }} Team</p>
 
     <div class="button-group">
         <div class="row justify-content-center">

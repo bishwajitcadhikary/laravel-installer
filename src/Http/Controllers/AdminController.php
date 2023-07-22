@@ -1,14 +1,4 @@
 <?php
-/**
- * @version 1.0.0
- *
- * @link https://codecanyon.net/user/abndevs/portfolio
- *
- * @author Bishwajit Adhikary
- * @copyright (c) 2023 abnDevs
- * @license https://codecanyon.net/licenses/terms/regular
- **/
-
 namespace AbnDevs\Installer\Http\Controllers;
 
 use AbnDevs\Installer\Http\Requests\StoreAdminRequest;
@@ -33,7 +23,7 @@ class AdminController extends Controller
         ]);
 
         if (config('installer.admin.has_role')) {
-            if (! Role::where('name', 'Super Admin')->exists()) {
+            if (! Role::where('name', config('installer.admin.role', 'Super Admin'))->exists()) {
                 Role::create(['name' => config('installer.admin.role')]);
             }
 

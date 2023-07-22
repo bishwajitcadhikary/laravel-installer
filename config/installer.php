@@ -1,17 +1,16 @@
 <?php
-/**
- * @version 1.0.0
- *
- * @link https://codecanyon.net/user/abndevs/portfolio
- *
- * @author Bishwajit Adhikary
- * @copyright (c) 2023 abnDevs
- * @license https://codecanyon.net/licenses/terms/regular
- **/
 
-// config for AbnDevs/Installer
 return [
     'prefix' => env('INSTALLER_PREFIX', 'installer'),
+
+    'company' => [
+        'name' => 'abnDevs',
+        'url' => 'https://abndevs.net',
+        'support_email' => 'care.abndevs@gmail.com',
+        'support_phone' => '+8801322635808',
+    ],
+
+    'user_agreement_file_path' => env('USER_AGREEMENT_FILE_PATH', 'user-agreement.txt'),
 
     /*
      * -------------------------------------------------------------------------------------
@@ -89,4 +88,16 @@ return [
         base_path('storage/logs/') => '775',
         base_path('bootstrap/cache/') => '775',
     ],
+
+    'database' => [
+        'default' => 'mysql',
+        'mysql' => true,
+        'sqlite' => false,
+        'pgsql' => false,
+        'sqlsrv' => false,
+    ],
+
+    'extra' => [
+        'command' => env('INSTALLER_EXTRA_COMMAND', false)
+    ]
 ];
