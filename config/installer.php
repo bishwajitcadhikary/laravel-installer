@@ -33,6 +33,7 @@ return [
         'show_form' => true,
         'has_role' => false,
         'role' => '', // Role name ex: Super Admin
+        'extra' => []
     ],
 
     /*

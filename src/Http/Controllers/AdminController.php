@@ -20,6 +20,7 @@ class AdminController extends Controller
             'name' => $request->validated('name'),
             'email' => $request->validated('email'),
             'password' => bcrypt($request->validated('password')),
+            ...config('installer.admin.extra')
         ]);
 
         if (config('installer.admin.has_role')) {
