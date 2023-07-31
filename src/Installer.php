@@ -6,6 +6,7 @@ use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use ZipArchive;
@@ -90,6 +91,10 @@ class Installer
         }
 
         $this->updateVersion($files['version']);
+
+        $this->runMigrations();
+
+        $this->optimizeApplication();
     }
 
     /**
@@ -244,5 +249,17 @@ class Installer
         }catch (Exception $e){
             flash(trans('Failed to upgrade the application'), 'error');
         }
+    }
+
+    private function runMigrations(): void
+    {
+        Artisan::call('migrate', [
+            '--force' => true,
+        ]);
+    }
+
+    private function optimizeApplication(): void
+    {
+        Artisan::call('optimize:clear');
     }
 }
