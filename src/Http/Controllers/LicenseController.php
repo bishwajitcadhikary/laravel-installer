@@ -71,7 +71,7 @@ class LicenseController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => $response->json('message'),
-                'redirect' => route('login'),
+                'redirect' => session('url.intended', route('login')),
             ]);
         } else {
             return response()->json([

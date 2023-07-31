@@ -2,6 +2,7 @@
 
 namespace AbnDevs\Installer;
 
+use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;
@@ -205,10 +206,9 @@ class Installer
                 if (is_writable($main_file)) {
                     unlink($main_file);
                 }
-
             }
         } catch (Exception $e) {
-            flash($e->getMessage(), 'error');
+            flash(trans('Failed to upgrade the application'), 'error');
         }
     }
 
@@ -221,11 +221,10 @@ class Installer
             DB::unprepared(file_get_contents($sql_file));
 
             @chmod($sql_file, 0777);
-            if (is_writable($sql_file)) {
-                unlink($sql_file);
-            }
+
+            unlink($sql_file);
         } catch (Exception $e) {
-            flash($e->getMessage(), 'error');
+            flash(trans('Failed to upgrade the application'), 'error');
         }
     }
 
@@ -234,24 +233,16 @@ class Installer
      */
     private function updateVersion(mixed $version): void
     {
-        @chmod(base_path('.env'), 0777);
+        try {
+            $dotenvEditor = new DotenvEditor();
 
-        if (is_writable(base_path('.env'))) {
-            // Get the content of the .env file
-            $env = file_get_contents(base_path('.env'));
+            @chmod(base_path('.env'), 0777);
 
-            // Check if the APP_VERSION key is present
-            if (!str_contains($env, 'APP_VERSION=')) {
-                // Add the APP_VERSION key if it doesn't exist
-                $env .= "\nAPP_VERSION=" . $version;
-            } else {
-                // Replace the version
-                $env = preg_replace('/^APP_VERSION=(.*)$/m', 'APP_VERSION=' . $version, $env);
-            }
+            $dotenvEditor->addData(['APP_VERSION' => $version]);
 
-            // Save the .env file
-            file_put_contents(base_path('.env'), $env);
+            @chmod(base_path('.env'), 0644);
+        }catch (Exception $e){
+            flash(trans('Failed to upgrade the application'), 'error');
         }
-        @chmod(base_path('.env'), 0644);
     }
 }

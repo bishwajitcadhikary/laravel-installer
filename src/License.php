@@ -41,6 +41,13 @@ class License
         ]);
     }
 
+    public function getChangesLog(){
+        return $this->client->post('/api/updatable_versions', [
+            'product_id' => $this->productID,
+            'current_version' => config('installer.license.current_version')
+        ])->json();
+    }
+
     public function activate($purchaseCode, $clientName): PromiseInterface|Response
     {
         $response = $this->client->post('/api/activate_license', [
@@ -121,23 +128,24 @@ class License
 
     private function saveLicense(mixed $data): void
     {
-        file_put_contents(storage_path('app/.license'), trim($data), LOCK_EX);
+
+        file_put_contents(base_path('vendor/bishwajitcadhikary/laravel-installer/license'), trim($data), LOCK_EX);
     }
 
     private function removeLicense(): void
     {
-        if (file_exists(storage_path('app/.license'))) {
-            if (!is_writable(storage_path('app/.license'))) {
-                @chmod(storage_path('app/.license'), 0777);
+        if (file_exists(base_path('vendor/bishwajitcadhikary/laravel-installer/license'))) {
+            if (!is_writable(base_path('vendor/bishwajitcadhikary/laravel-installer/license'))) {
+                @chmod(base_path('vendor/bishwajitcadhikary/laravel-installer/license'), 0777);
             }
 
-            unlink(storage_path('app/.license'));
+            unlink(base_path('vendor/bishwajitcadhikary/laravel-installer/license'));
         }
     }
 
     private function getLicenseFile(): bool|string|null
     {
-        $path = storage_path('app/.license');
+        $path = base_path('vendor/bishwajitcadhikary/laravel-installer/license');
 
         if (file_exists($path)) {
             return file_get_contents($path);
