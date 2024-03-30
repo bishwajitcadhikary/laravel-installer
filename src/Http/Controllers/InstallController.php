@@ -1,8 +1,8 @@
 <?php
-namespace AbnDevs\Installer\Http\Controllers;
+namespace WovoSoft\Installer\Http\Controllers;
 
-use AbnDevs\Installer\Facades\License;
-use AbnDevs\Installer\Http\Requests\StoreAgreementRequest;
+use WovoSoft\Installer\Facades\License;
+use WovoSoft\Installer\Http\Requests\StoreAgreementRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;

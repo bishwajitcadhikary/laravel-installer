@@ -5,8 +5,8 @@ return [
 
     'company' => [
         'name' => 'abnDevs',
-        'url' => 'https://abndevs.net',
-        'support_email' => 'care.abndevs@gmail.com',
+        'url' => 'https://wovosoft.com',
+        'support_email' => 'bishwajitcadhikary@gmail.com',
         'support_phone' => '+8801322635808',
     ],
 
@@ -22,7 +22,7 @@ return [
      */
     'license' => [
         'product_id' => '',
-        'api_url' => 'https://license.abndevs.net',
+        'api_url' => 'https://license.wovosoft.com',
         'api_key' => '',
         'api_language' => 'english',
         'current_version' => env('APP_VERSION', 'v1.0.0'),
@@ -86,6 +86,7 @@ return [
     *
     */
     'permissions' => [
+        base_path('.env') => '644',
         base_path('storage/framework/') => '775',
         base_path('storage/logs/') => '775',
         base_path('bootstrap/cache/') => '775',

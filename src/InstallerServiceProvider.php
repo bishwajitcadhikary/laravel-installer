@@ -1,9 +1,9 @@
 <?php
-namespace AbnDevs\Installer;
+namespace WovoSoft\Installer;
 
-use AbnDevs\Installer\Http\Middleware\InstallationMiddleware;
-use AbnDevs\Installer\Http\Middleware\LicensedMiddleware;
-use AbnDevs\Installer\Http\Middleware\RedirectIfInstalledMiddleware;
+use WovoSoft\Installer\Http\Middleware\InstallationMiddleware;
+use WovoSoft\Installer\Http\Middleware\LicensedMiddleware;
+use WovoSoft\Installer\Http\Middleware\RedirectIfInstalledMiddleware;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Http\Kernel;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;

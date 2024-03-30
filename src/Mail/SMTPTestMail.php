@@ -1,5 +1,5 @@
 <?php
-namespace AbnDevs\Installer\Mail;
+namespace WovoSoft\Installer\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

@@ -1,15 +1,15 @@
 <?php
-namespace AbnDevs\Installer\Facades;
+namespace WovoSoft\Installer\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \AbnDevs\Installer\Installer
+ * @see \WovoSoft\Installer\Installer
  */
 class Installer extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \AbnDevs\Installer\Installer::class;
+        return \WovoSoft\Installer\Installer::class;
     }
 }

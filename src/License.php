@@ -1,6 +1,6 @@
 <?php
 
-namespace AbnDevs\Installer;
+namespace WovoSoft\Installer;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;

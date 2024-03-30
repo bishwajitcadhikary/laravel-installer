@@ -38,7 +38,7 @@ php artisan vendor:publish --tag="installer-views"
 ## Usage
 
 ```php
-$installer = new AbnDevs\Installer();
+$installer = new WovoSoft\Installer();
 echo $installer->update();
 ```
 

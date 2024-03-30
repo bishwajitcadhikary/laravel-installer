@@ -1,7 +1,7 @@
 <?php
-namespace AbnDevs\Installer\Http\Controllers;
+namespace WovoSoft\Installer\Http\Controllers;
 
-use AbnDevs\Installer\Http\Requests\StoreAdminRequest;
+use WovoSoft\Installer\Http\Requests\StoreAdminRequest;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;

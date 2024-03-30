@@ -1,5 +1,5 @@
 <?php
-namespace AbnDevs\Installer\Http\Middleware;
+namespace WovoSoft\Installer\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

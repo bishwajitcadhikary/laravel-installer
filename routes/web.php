@@ -1,12 +1,12 @@
 <?php
 
-use AbnDevs\Installer\Http\Controllers\AdminController;
-use AbnDevs\Installer\Http\Controllers\DatabaseController;
-use AbnDevs\Installer\Http\Controllers\InstallController;
-use AbnDevs\Installer\Http\Controllers\LicenseController;
-use AbnDevs\Installer\Http\Controllers\PermissionController;
-use AbnDevs\Installer\Http\Controllers\RequirementController;
-use AbnDevs\Installer\Http\Controllers\SMTPController;
+use WovoSoft\Installer\Http\Controllers\AdminController;
+use WovoSoft\Installer\Http\Controllers\DatabaseController;
+use WovoSoft\Installer\Http\Controllers\InstallController;
+use WovoSoft\Installer\Http\Controllers\LicenseController;
+use WovoSoft\Installer\Http\Controllers\PermissionController;
+use WovoSoft\Installer\Http\Controllers\RequirementController;
+use WovoSoft\Installer\Http\Controllers\SMTPController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([

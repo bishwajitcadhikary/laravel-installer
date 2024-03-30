@@ -1,6 +1,6 @@
 <?php
 
-namespace AbnDevs\Installer;
+namespace WovoSoft\Installer;
 
 use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;

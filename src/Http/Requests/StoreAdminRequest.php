@@ -1,5 +1,5 @@
 <?php
-namespace AbnDevs\Installer\Http\Requests;
+namespace WovoSoft\Installer\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;

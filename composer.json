@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "AbnDevs\\Installer\\": "src/"
+            "WovoSoft\\Installer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AbnDevs\\Installer\\Tests\\": "tests/"
+            "WovoSoft\\Installer\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -39,12 +39,12 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AbnDevs\\Installer\\InstallerServiceProvider",
+                "WovoSoft\\Installer\\InstallerServiceProvider",
                 "Brotzka\\DotenvEditor\\DotenvEditorServiceProvider"
             ],
             "aliases": {
-                "Installer": "AbnDevs\\Installer\\Facades\\Installer",
-                "License": "AbnDevs\\Installer\\Facades\\License",
+                "Installer": "WovoSoft\\Installer\\Facades\\Installer",
+                "License": "WovoSoft\\Installer\\Facades\\License",
                 "DotenvEditor": "Brotzka\\DotenvEditor\\DotenvEditorFacade"
             }
         }

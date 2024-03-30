@@ -1,8 +1,8 @@
 <?php
-namespace AbnDevs\Installer\Http\Controllers;
+namespace WovoSoft\Installer\Http\Controllers;
 
-use AbnDevs\Installer\Facades\License;
-use AbnDevs\Installer\Http\Requests\StoreDatabaseRequest;
+use WovoSoft\Installer\Facades\License;
+use WovoSoft\Installer\Http\Requests\StoreDatabaseRequest;
 use App\Http\Controllers\Controller;
 use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;
