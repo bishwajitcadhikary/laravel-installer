@@ -1,5 +1,5 @@
 <?php
-namespace WovoSoft\Installer\Mail;
+namespace KinDigi\Installer\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;

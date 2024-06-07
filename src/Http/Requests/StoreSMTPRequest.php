@@ -1,5 +1,5 @@
 <?php
-namespace WovoSoft\Installer\Http\Requests;
+namespace KinDigi\Installer\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

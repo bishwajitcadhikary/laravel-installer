@@ -1,12 +1,12 @@
 <?php
 
-use WovoSoft\Installer\Http\Controllers\AdminController;
-use WovoSoft\Installer\Http\Controllers\DatabaseController;
-use WovoSoft\Installer\Http\Controllers\InstallController;
-use WovoSoft\Installer\Http\Controllers\LicenseController;
-use WovoSoft\Installer\Http\Controllers\PermissionController;
-use WovoSoft\Installer\Http\Controllers\RequirementController;
-use WovoSoft\Installer\Http\Controllers\SMTPController;
+use KinDigi\Installer\Http\Controllers\AdminController;
+use KinDigi\Installer\Http\Controllers\DatabaseController;
+use KinDigi\Installer\Http\Controllers\InstallController;
+use KinDigi\Installer\Http\Controllers\LicenseController;
+use KinDigi\Installer\Http\Controllers\PermissionController;
+use KinDigi\Installer\Http\Controllers\RequirementController;
+use KinDigi\Installer\Http\Controllers\SMTPController;
 use Illuminate\Support\Facades\Route;
 
 Route::group([

@@ -1,5 +1,5 @@
 <?php
-namespace WovoSoft\Installer\Http\Middleware;
+namespace KinDigi\Installer\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;

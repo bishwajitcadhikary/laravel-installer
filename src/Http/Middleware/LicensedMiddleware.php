@@ -1,7 +1,7 @@
 <?php
-namespace WovoSoft\Installer\Http\Middleware;
+namespace KinDigi\Installer\Http\Middleware;
 
-use WovoSoft\Installer\Facades\License;
+use KinDigi\Installer\Facades\License;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;

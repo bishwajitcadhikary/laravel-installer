@@ -1,15 +1,15 @@
 <?php
-namespace WovoSoft\Installer\Facades;
+namespace KinDigi\Installer\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \WovoSoft\Installer\License
+ * @see \KinDigi\Installer\License
  */
 class License extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \WovoSoft\Installer\License::class;
+        return \KinDigi\Installer\License::class;
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace WovoSoft\Installer\Http\Controllers;
+namespace KinDigi\Installer\Http\Controllers;
 
-use WovoSoft\Installer\Http\Requests\StoreAdminRequest;
+use KinDigi\Installer\Http\Requests\StoreAdminRequest;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Cache;

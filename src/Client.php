@@ -1,6 +1,6 @@
 <?php
 
-namespace WovoSoft\Installer;
+namespace KinDigi\Installer;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\Response;

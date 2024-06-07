@@ -1,6 +1,6 @@
 <?php
 
-namespace WovoSoft\Installer;
+namespace KinDigi\Installer;
 
 use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;

@@ -1,8 +1,8 @@
 <?php
-namespace WovoSoft\Installer\Http\Controllers;
+namespace KinDigi\Installer\Http\Controllers;
 
-use WovoSoft\Installer\Facades\License;
-use WovoSoft\Installer\Http\Requests\StoreDatabaseRequest;
+use KinDigi\Installer\Facades\License;
+use KinDigi\Installer\Http\Requests\StoreDatabaseRequest;
 use App\Http\Controllers\Controller;
 use Brotzka\DotenvEditor\DotenvEditor;
 use Exception;

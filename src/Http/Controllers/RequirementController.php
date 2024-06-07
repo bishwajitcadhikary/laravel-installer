@@ -1,5 +1,5 @@
 <?php
-namespace WovoSoft\Installer\Http\Controllers;
+namespace KinDigi\Installer\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;

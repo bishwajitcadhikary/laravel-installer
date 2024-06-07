@@ -1,9 +1,9 @@
 <?php
-namespace WovoSoft\Installer;
+namespace KinDigi\Installer;
 
-use WovoSoft\Installer\Http\Middleware\InstallationMiddleware;
-use WovoSoft\Installer\Http\Middleware\LicensedMiddleware;
-use WovoSoft\Installer\Http\Middleware\RedirectIfInstalledMiddleware;
+use KinDigi\Installer\Http\Middleware\InstallationMiddleware;
+use KinDigi\Installer\Http\Middleware\LicensedMiddleware;
+use KinDigi\Installer\Http\Middleware\RedirectIfInstalledMiddleware;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Http\Kernel;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;

@@ -1,12 +1,12 @@
 {
-    "name": "bishwajitcadhikary/laravel-installer",
+    "name": "kindigi/laravel-installer",
     "description": "This is my package installer",
     "keywords": [
         "bishwajitcadhikary",
         "laravel",
         "installer"
     ],
-    "homepage": "https://github.com/bishwajitcadhikary/installer",
+    "homepage": "https://github.com/kindigi/laravel-installer",
     "license": "MIT",
     "authors": [
         {
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "WovoSoft\\Installer\\": "src/"
+            "KinDigi\\Installer\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "WovoSoft\\Installer\\Tests\\": "tests/"
+            "KinDigi\\Installer\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -39,12 +39,12 @@
     "extra": {
         "laravel": {
             "providers": [
-                "WovoSoft\\Installer\\InstallerServiceProvider",
+                "KinDigi\\Installer\\InstallerServiceProvider",
                 "Brotzka\\DotenvEditor\\DotenvEditorServiceProvider"
             ],
             "aliases": {
-                "Installer": "WovoSoft\\Installer\\Facades\\Installer",
-                "License": "WovoSoft\\Installer\\Facades\\License",
+                "Installer": "KinDigi\\Installer\\Facades\\Installer",
+                "License": "KinDigi\\Installer\\Facades\\License",
                 "DotenvEditor": "Brotzka\\DotenvEditor\\DotenvEditorFacade"
             }
         }

@@ -1,8 +1,8 @@
 <?php
-namespace WovoSoft\Installer\Http\Controllers;
+namespace KinDigi\Installer\Http\Controllers;
 
-use WovoSoft\Installer\Facades\License;
-use WovoSoft\Installer\Http\Requests\StoreLicenseRequest;
+use KinDigi\Installer\Facades\License;
+use KinDigi\Installer\Http\Requests\StoreLicenseRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;

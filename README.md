@@ -38,7 +38,7 @@ php artisan vendor:publish --tag="installer-views"
 ## Usage
 
 ```php
-$installer = new WovoSoft\Installer();
+$installer = new KinDigi\Installer();
 echo $installer->update();
 ```
 
